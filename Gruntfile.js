@@ -30,20 +30,20 @@ module.exports = function(grunt)
 
   // Project configuration.
   grunt.initConfig(
-  {
-    pkg:   pkg,
-    bower: bower,
+    {
+      pkg:   pkg,
+      bower: bower,
 
-    // Plugins configuration
-    clean:
+      // Plugins configuration
+      clean:
     {
       generated_code: [DIST_DIR, 'src'],
 
       generated_doc: '<%= jsdoc.all.dest %>'
     },
 
-    // Generate documentation
-    jsdoc:
+      // Generate documentation
+      jsdoc:
     {
       all:
       {
@@ -52,8 +52,8 @@ module.exports = function(grunt)
       }
     },
 
-    // Generate browser versions and mapping debug file
-    browserify:
+      // Generate browser versions and mapping debug file
+      browserify:
     {
       require:
       {
@@ -90,10 +90,10 @@ module.exports = function(grunt)
           },
           plugin: [
             ['minifyify',
-             {
-               compressPath: DIST_DIR,
-               map: '<%= pkg.name %>.map'
-             }]
+              {
+                compressPath: DIST_DIR,
+                map: '<%= pkg.name %>.map'
+              }]
           ]
         }
       },
@@ -113,18 +113,18 @@ module.exports = function(grunt)
           },
           plugin: [
             ['minifyify',
-             {
-               compressPath: DIST_DIR,
-               map: '<%= pkg.name %>.map',
-               output: DIST_DIR+'/<%= pkg.name %>.map'
-             }]
+              {
+                compressPath: DIST_DIR,
+                map: '<%= pkg.name %>.map',
+                output: DIST_DIR+'/<%= pkg.name %>.map'
+              }]
           ]
         }
       }
     },
 
-    // Generate bower.json file from package.json data
-    sync:
+      // Generate bower.json file from package.json data
+      sync:
     {
       bower:
       {
@@ -141,8 +141,8 @@ module.exports = function(grunt)
       }
     },
 
-    // Publish / update package info in Bower
-    shell:
+      // Publish / update package info in Bower
+      shell:
     {
       bower: {
         command: [
@@ -152,7 +152,7 @@ module.exports = function(grunt)
         ].join('&&')
       }
     }
-  });
+    });
 
   // Load plugins
   grunt.loadNpmTasks('grunt-browserify');

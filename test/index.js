@@ -69,10 +69,10 @@ exports['encode JsonRPC 2.0'] =
     var notification = this.rpcBuilder.encode(METHOD);
 
     test.deepEqual(JSON.parse(notification),
-    {
-      jsonrpc: '2.0',
-      method: METHOD
-    });
+      {
+        jsonrpc: '2.0',
+        method: METHOD
+      });
 
     // Test notification
     notification = this.rpcBuilder.decode(notification);
@@ -93,11 +93,11 @@ exports['encode JsonRPC 2.0'] =
     var request = this.rpcBuilder.encode(METHOD, noop);
 
     test.deepEqual(JSON.parse(request),
-    {
-      jsonrpc: '2.0',
-      method: METHOD,
-      id: 0
-    });
+      {
+        jsonrpc: '2.0',
+        method: METHOD,
+        id: 0
+      });
 
     // Test request
     request = this.rpcBuilder.decode(request);
@@ -316,11 +316,11 @@ exports['encode JsonRPC 2.0'] =
 
     // Test response message
     test.deepEqual(JSON.parse(response),
-    {
-      jsonrpc: '2.0',
-      result: value,
-      id: 0
-    });
+      {
+        jsonrpc: '2.0',
+        result: value,
+        id: 0
+      });
 
     response = this.rpcBuilder.decode(response);
 
@@ -350,11 +350,11 @@ exports['encode JsonRPC 2.0'] =
     {
       // Test response message
       test.deepEqual(JSON.parse(message),
-      {
-        jsonrpc: '2.0',
-        result: value,
-        id: 0
-      });
+        {
+          jsonrpc: '2.0',
+          result: value,
+          id: 0
+        });
 
       message = self.rpcBuilder.decode(message);
 
@@ -386,11 +386,11 @@ exports['encode JsonRPC 2.0'] =
     {
       // Test response message
       test.deepEqual(JSON.parse(message),
-      {
-        jsonrpc: '2.0',
-        result: value,
-        id: 0
-      });
+        {
+          jsonrpc: '2.0',
+          result: value,
+          id: 0
+        });
 
       message = self.rpcBuilder.decode(message);
 
@@ -415,24 +415,24 @@ exports['encode JsonRPC 2.0'] =
     var value = {'asdf': 'qwert'};
 
     var transport = new EventTarget;
-        transport.onmessage = null;
-        transport.send = function(message)
-        {
-          message = JSON.parse(message);
+    transport.onmessage = null;
+    transport.send = function(message)
+    {
+      message = JSON.parse(message);
 
-          var event =
+      var event =
           {
             type: 'message',
             data: JSON.stringify(
-            {
-              jsonrpc: '2.0',
-              result: message.params,
-              id: 0
-            })
+              {
+                jsonrpc: '2.0',
+                result: message.params,
+                id: 0
+              })
           };
 
-          this.dispatchEvent(event);
-        };
+      this.dispatchEvent(event);
+    };
 
     this.rpcBuilder.transport = transport;
 
@@ -454,7 +454,7 @@ exports['encode JsonRPC 2.0'] =
     test.expect(1);
 
     var transport = new EventTarget;
-        transport.onmessage = null;
+    transport.onmessage = null;
 
     this.rpcBuilder.transport = transport;
     this.rpcBuilder.on('request', function(request)
@@ -468,10 +468,10 @@ exports['encode JsonRPC 2.0'] =
     {
       type: 'message',
       data: JSON.stringify(
-      {
-        jsonrpc: '2.0',
-        method: METHOD
-      })
+        {
+          jsonrpc: '2.0',
+          method: METHOD
+        })
     };
     transport.dispatchEvent(event);
   },

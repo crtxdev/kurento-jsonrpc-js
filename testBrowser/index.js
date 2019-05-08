@@ -14,7 +14,7 @@ function load()
   var ws_uri = "ws://localhost:8888/kurento";
 
   function connectCallback(){
-   connected = true;
+    connected = true;
   }
 
   function disconnectCallback(){
@@ -46,10 +46,10 @@ function load()
         var notification = this.rpcBuilder.encode(METHOD);
 
         test.deepEqual(JSON.parse(notification),
-        {
-          jsonrpc: '2.0',
-          method: METHOD
-        });
+          {
+            jsonrpc: '2.0',
+            method: METHOD
+          });
 
         // Test notification
         notification = this.rpcBuilder.decode(notification);
@@ -70,11 +70,11 @@ function load()
         var request = this.rpcBuilder.encode(METHOD, noop);
 
         test.deepEqual(JSON.parse(request),
-        {
-          jsonrpc: '2.0',
-          method: METHOD,
-          id: 0
-        });
+          {
+            jsonrpc: '2.0',
+            method: METHOD,
+            id: 0
+          });
 
         // Test request
         request = this.rpcBuilder.decode(request);
@@ -293,11 +293,11 @@ function load()
 
         // Test response message
         test.deepEqual(JSON.parse(response),
-        {
-          jsonrpc: '2.0',
-          result: value,
-          id: 0
-        });
+          {
+            jsonrpc: '2.0',
+            result: value,
+            id: 0
+          });
 
         response = this.rpcBuilder.decode(response);
 
@@ -327,11 +327,11 @@ function load()
         {
           // Test response message
           test.deepEqual(JSON.parse(message),
-          {
-            jsonrpc: '2.0',
-            result: value,
-            id: 0
-          });
+            {
+              jsonrpc: '2.0',
+              result: value,
+              id: 0
+            });
 
           message = self.rpcBuilder.decode(message);
 
@@ -363,11 +363,11 @@ function load()
         {
           // Test response message
           test.deepEqual(JSON.parse(message),
-          {
-            jsonrpc: '2.0',
-            result: value,
-            id: 0
-          });
+            {
+              jsonrpc: '2.0',
+              result: value,
+              id: 0
+            });
 
           message = self.rpcBuilder.decode(message);
 
@@ -392,24 +392,24 @@ function load()
         var value = {'asdf': 'qwert'};
 
         var transport = new EventTarget;
-            transport.onmessage = null;
-            transport.send = function(message)
-            {
-              message = JSON.parse(message);
+        transport.onmessage = null;
+        transport.send = function(message)
+        {
+          message = JSON.parse(message);
 
-              var event =
+          var event =
               {
                 type: 'message',
                 data: JSON.stringify(
-                {
-                  jsonrpc: '2.0',
-                  result: message.params,
-                  id: 0
-                })
+                  {
+                    jsonrpc: '2.0',
+                    result: message.params,
+                    id: 0
+                  })
               };
 
-              this.dispatchEvent(event);
-            };
+          this.dispatchEvent(event);
+        };
 
         this.rpcBuilder.setTransport(transport);
 
@@ -431,7 +431,7 @@ function load()
         test.expect(1);
 
         var transport = new EventTarget;
-            transport.onmessage = null;
+        transport.onmessage = null;
 
         this.rpcBuilder.setTransport(transport);
         this.rpcBuilder.on('request', function(request)
@@ -445,45 +445,45 @@ function load()
         {
           type: 'message',
           data: JSON.stringify(
-          {
-            jsonrpc: '2.0',
-            method: METHOD
-          })
+            {
+              jsonrpc: '2.0',
+              method: METHOD
+            })
         };
         transport.dispatchEvent(event);
       }
       ,
 
-  'create JsonRpcClientWs with WS': function(test)
-  {
-    test.expect(1);
+      'create JsonRpcClientWs with WS': function(test)
+      {
+        test.expect(1);
 
-    var configuration = {
-      sendCloseMessage : false,
-      ws : {
-        uri : ws_uri,
-        useSockJS: false,
-        onconnected : connectCallback,
-        ondisconnect : disconnectCallback,
-        onreconnecting : disconnectCallback,
-        onreconnected : connectCallback
-      },
-      rpc : {
-        requestTimeout : 15000
+        var configuration = {
+          sendCloseMessage : false,
+          ws : {
+            uri : ws_uri,
+            useSockJS: false,
+            onconnected : connectCallback,
+            ondisconnect : disconnectCallback,
+            onreconnecting : disconnectCallback,
+            onreconnected : connectCallback
+          },
+          rpc : {
+            requestTimeout : 15000
+          }
+        };
+
+        var jsonRpcClientWs = new JsonRpcClient(configuration);
+
+        test.ok(jsonRpcClientWs instanceof JsonRpcClient);
+
+        setTimeout(function()
+        {
+          jsonRpcClientWs.close();
+          test.done();
+        }, 4*1000)
+
       }
-    };
-
-    var jsonRpcClientWs = new JsonRpcClient(configuration);
-
-    test.ok(jsonRpcClientWs instanceof JsonRpcClient);
-
-    setTimeout(function()
-    {
-      jsonRpcClientWs.close();
-      test.done();
-    }, 4*1000)
-
-  }
     }
   });
 }

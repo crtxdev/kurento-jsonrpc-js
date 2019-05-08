@@ -48,12 +48,12 @@
     "Ivan Gracia <igracia@kurento.org>"
   ],
   "bugs": {
-    "url": "https://github.com/Kurento/bugtracker/issues",
+    "url": "https://github.com/crtxdev/kurento-jsonrpc-js/issues",
     "email": "kurento@googlegroups.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Kurento/kurento-jsonrpc-js.git"
+    "url": "https://github.com/crtxdev/kurento-jsonrpc-js.git"
   },
   "main": "lib/index.js",
   "scripts": {
@@ -61,9 +61,9 @@
   },
   "dependencies": {
     "inherits": "^2.0.1",
-    "ws": "^1.1.1",
-    "bufferutil": "1.2.x",
-    "utf-8-validate": "1.2.x"
+    "ws": "^6.1.1",
+    "bufferutil": "^4.0.0",
+    "utf-8-validate": "^5.0.0"
   },
   "devDependencies": {
     "bower": "~1.7.9",
